@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "tolrevervationmanager",
+    "staging": "tolrevervationmanager"
+  },
+  "targets": {},
+  "etags": {}
+}
