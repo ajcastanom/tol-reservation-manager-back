@@ -6,13 +6,23 @@ const HttpStatus = require("http-status-codes");
 
 const login = async (req: any, res = response) => {
     console.log("Login");
-    console.log(req.body);
     const {email, password} = req.body;
     const authenticationService = AuthenticationService.getInstance();
     authenticationService.login(email, password)
-        .then(function(userCredential: any) {
-            const token:Token = userCredential.user.toJSON().stsTokenManager;
-            delete token["apiKey"];
+        .then(function(token: Token) {
+            res.status(HttpStatus.StatusCodes.OK).send(token);
+        }).catch(function(e) {
+        console.log(e);
+        res.status(HttpStatus.StatusCodes.UNAUTHORIZED).send(false);
+    });
+};
+
+const refreshToken = async (req: any, res = response) => {
+    console.log("Refresh token");
+    const {apiKey, refreshToken} = req.body;
+    const authenticationService = AuthenticationService.getInstance();
+    authenticationService.refreshToken(apiKey, refreshToken)
+        .then(function(token: Token) {
             res.status(HttpStatus.StatusCodes.OK).send(token);
         }).catch(function(e) {
         console.log(e);
@@ -22,4 +32,5 @@ const login = async (req: any, res = response) => {
 
 module.exports = {
     login,
+    refreshToken,
 };

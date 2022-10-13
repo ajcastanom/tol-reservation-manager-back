@@ -8,9 +8,9 @@ require("dotenv").config();
 // initializeApp
 admin.initializeApp({
     credential: admin.credential.cert(ConfigAccount.getServiceAccount()),
-    databaseURL: ConfigAccount.getDatabaseURL(),
+    databaseURL: ConfigAccount.getAuthDomain(),
     storageBucket: ConfigAccount.getStorageBucket(),
-    projectId: ConfigAccount.getProjectId(),
+    projectId: ConfigAccount.getServiceAccount().project_id,
 });
 
 // @ts-ignore
