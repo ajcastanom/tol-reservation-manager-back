@@ -1,7 +1,7 @@
 {
   "projects": {
     "default": "tolrevervationmanager",
-    "staging": "tolrevervationmanager"
+    "staging": "tolreservationmanager"
   },
   "targets": {},
   "etags": {}

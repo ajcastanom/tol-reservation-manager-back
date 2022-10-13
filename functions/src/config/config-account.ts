@@ -8,15 +8,11 @@ export default class ConfigAccount {
     return serviceAccount;
   }
 
-  static getProjectId(): string {
-    return `${serviceAccount.project_id}`;
-  }
-
-  static getDatabaseURL(): string {
+  static getAuthDomain(): string {
     return `https://${serviceAccount.project_id}.firebaseio.com`;
   }
 
   static getStorageBucket(): string {
-    return `${serviceAccount.storageBucket}`;
+    return `https://${serviceAccount.project_id}.appspot.com`;
   }
 }
