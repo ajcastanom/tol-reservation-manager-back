@@ -1,17 +1,19 @@
+import ConfigAccount from "../config/config-account";
+
 export const firebaseConfig = {
-  apiKey: "AIzaSyACHFcdFs0zMlzxelJIhNNZ7ceHspX0G28",
-  authDomain: "tolrevervationmanager.firebaseapp.com",
-  projectId: "tolrevervationmanager",
-  storageBucket: "tolrevervationmanager.appspot.com",
-  messagingSenderId: "244025730996",
-  appId: "1:244025730996:web:e47a04fcf8511ef008f4e1",
-  measurementId: "G-NL82JLF780"
+  apiKey: ConfigAccount.getServiceAccount().api_key,
+  authDomain: ConfigAccount.getAuthDomain(),
+  projectId: ConfigAccount.getServiceAccount().project_id,
+  storageBucket: ConfigAccount.getStorageBucket(),
+  messagingSenderId: ConfigAccount.getServiceAccount().messaging_sender_id,
+  appId: ConfigAccount.getServiceAccount().app_id,
+  measurementId: ConfigAccount.getServiceAccount().measurement_id,
 };
 
 export const corsOptionsDelegate = (req: any, callback: any) => {
   let corsOptions = null;
   const whiteList = [
-    "https://gdocumentlicense.web.app"
+    "https://tolreservationmanager.web.app",
   ];
 
   if (whiteList.indexOf(req.header("Origin")) !== -1) {

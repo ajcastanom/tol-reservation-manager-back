@@ -1,6 +1,8 @@
 export interface Token{
     refreshToken: string;
     accessToken: string;
-    expirationTime: string;
-    apiKey?:string;
+    expirationTime?: string;
+    expireIn?: string
+    apiKey:string;
+    user?: any;
 }
