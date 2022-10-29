@@ -58,23 +58,16 @@ export class AuthenticationService {
     public async recovery(email: string): Promise<any> {
         const auth = await firebase.auth();
         const actionCodeSettings = {
-            // URL you want to redirect back to. The domain (www.example.com) for
-            // this URL must be whitelisted in the Firebase Console.
             url: "https://tolreservationmanager.web.app",
-            // This must be true for email link sign-in.
             handleCodeInApp: true,
         };
         return await auth.sendPasswordResetEmail(email, actionCodeSettings)
             .then(() => {
-                // Do stuff with link here
-                // Construct password reset email template, embed the link and send
-                // using custom SMTP server
                 return {
                     recovery: Status.SUCCESS,
                 };
             })
             .catch((error: any) => {
-                // Some error occurred.
                 console.log(error);
                 return {
                     recovery: Status.FAILED,
