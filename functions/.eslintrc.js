@@ -33,5 +33,6 @@ module.exports = {
     "new-cap": 0,
     "max-len": 0,
     "require-jsdoc": 0,
+    "@typescript-eslint/no-explicit-any": 0,
   },
 };
