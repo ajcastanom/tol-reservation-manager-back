@@ -1,6 +1,7 @@
 import {response} from "express";
 import {AuthenticationService} from "../service/authentication-service";
 import {Token} from "../model/token-model";
+import {Status} from "../enum/status-enum";
 
 const HttpStatus = require("http-status-codes");
 
@@ -13,7 +14,9 @@ const login = async (req: any, res = response) => {
             res.status(HttpStatus.StatusCodes.OK).send(token);
         }).catch(function(e) {
         console.log(e);
-        res.status(HttpStatus.StatusCodes.UNAUTHORIZED).send(false);
+        res.status(HttpStatus.StatusCodes.UNAUTHORIZED).send({
+            login: Status.FAILED,
+        });
     });
 };
 
@@ -26,11 +29,29 @@ const refreshToken = async (req: any, res = response) => {
             res.status(HttpStatus.StatusCodes.OK).send(token);
         }).catch(function(e) {
         console.log(e);
-        res.status(HttpStatus.StatusCodes.UNAUTHORIZED).send(false);
+        res.status(HttpStatus.StatusCodes.UNAUTHORIZED).send({
+            refreshToken: Status.FAILED,
+        });
+    });
+};
+
+const recovery = async (req: any, res = response) => {
+    console.log("Recovery password");
+    const {email} = req.body;
+    const authenticationService = AuthenticationService.getInstance();
+    authenticationService.recovery(email)
+        .then(function(response: any) {
+            res.status(HttpStatus.StatusCodes.OK).send(response);
+        }).catch(function(e) {
+        console.log(e);
+        res.status(HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR).send({
+            recovery: Status.FAILED,
+        });
     });
 };
 
 module.exports = {
     login,
     refreshToken,
+    recovery,
 };
