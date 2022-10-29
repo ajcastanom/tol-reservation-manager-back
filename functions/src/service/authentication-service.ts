@@ -2,6 +2,7 @@ import {firebaseConfig} from "../utils/utils";
 import {AuthenticationClient} from "../client/authentication-client";
 import {Token} from "../model/token-model";
 import {Status} from "../enum/status-enum";
+import ConfigAccount from "../config/config-account";
 const admin = require("firebase-admin");
 
 
@@ -58,7 +59,7 @@ export class AuthenticationService {
     public async recovery(email: string): Promise<any> {
         const auth = await firebase.auth();
         const actionCodeSettings = {
-            url: "https://tolreservationmanager.web.app",
+            url: ConfigAccount.getServiceAccount().callback_recovery_password_url,
             handleCodeInApp: true,
         };
         return await auth.sendPasswordResetEmail(email, actionCodeSettings)
