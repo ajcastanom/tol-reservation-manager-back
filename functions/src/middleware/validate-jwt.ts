@@ -1,3 +1,5 @@
+import {Status} from "../enum/status-enum";
+
 const {response} = require("express");
 const HttpStatus = require("http-status-codes");
 const admin = require("firebase-admin");
@@ -19,7 +21,7 @@ export const validateJWT = async (req: any, res = response, next: () => void) =>
         next();
     } catch (error) {
         return res.status(HttpStatus.UNAUTHORIZED).json({
-            ok: false,
+            token: Status.FAILED,
             msg: "Token no válido",
         });
     }
