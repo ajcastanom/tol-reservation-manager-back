@@ -50,8 +50,24 @@ const recovery = async (req: any, res = response) => {
     });
 };
 
+const logout = async (req: any, res = response) => {
+    console.log("Logout");
+    const {uid} = req;
+    const authenticationService = AuthenticationService.getInstance();
+    authenticationService.logout(uid)
+        .then(function(response: any) {
+            res.status(HttpStatus.StatusCodes.OK).send(response);
+        }).catch(function(e) {
+        console.log(e);
+        res.status(HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR).send({
+            recovery: Status.FAILED,
+        });
+    });
+};
+
 module.exports = {
     login,
     refreshToken,
     recovery,
+    logout,
 };

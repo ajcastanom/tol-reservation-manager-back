@@ -5,7 +5,6 @@ import {Status} from "../enum/status-enum";
 import ConfigAccount from "../config/config-account";
 const admin = require("firebase-admin");
 
-
 const firebase = require("firebase");
 
 export class AuthenticationService {
@@ -74,5 +73,18 @@ export class AuthenticationService {
                     recovery: Status.FAILED,
                 };
             });
+    }
+
+    public async logout(uid: string): Promise<any> {
+        return await admin.auth().revokeRefreshTokens(uid).then(() => {
+            return {
+                logout: Status.SUCCESS,
+            };
+        }).catch((error: any) => {
+            console.log(error);
+            return {
+                logout: Status.FAILED,
+            };
+        });
     }
 }
