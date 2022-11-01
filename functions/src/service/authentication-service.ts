@@ -76,16 +76,15 @@ export class AuthenticationService {
     }
 
     public async logout(uid: string): Promise<any> {
-        console.log(uid);
         return await admin.auth().revokeRefreshTokens(uid).then(() => {
             return {
                 logout: Status.SUCCESS,
-            }
+            };
         }).catch((error: any) => {
             console.log(error);
             return {
                 logout: Status.FAILED,
-            }
+            };
         });
     }
 }

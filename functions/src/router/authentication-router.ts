@@ -13,4 +13,4 @@ authenticationRouter.use(cors(corsOptionsDelegate));
 authenticationRouter.post("/login", [], login);
 authenticationRouter.post("/refresh-token", [], refreshToken);
 authenticationRouter.post("/recovery", [], recovery);
-authenticationRouter.post("/logout", [validateJWT], logout);
+authenticationRouter.get("/logout", [validateJWT], logout);
