@@ -3,6 +3,7 @@ import {AuthenticationClient} from "../client/authentication-client";
 import {Token} from "../model/token-model";
 import {Status} from "../enum/status-enum";
 import ConfigAccount from "../config/config-account";
+import {Collection} from "../enum/collection-enum";
 const admin = require("firebase-admin");
 
 const firebase = require("firebase");
@@ -10,10 +11,12 @@ const firebase = require("firebase");
 export class AuthenticationService {
     private static instance: AuthenticationService;
     private readonly userRef: any;
+    private readonly roleRef: any;
 
     private constructor() {
         firebase.initializeApp(firebaseConfig);
-        this.userRef = admin.firestore().collection("user");
+        this.userRef = admin.firestore().collection(Collection.USER);
+        this.roleRef = admin.firestore().collection(Collection.ROLE);
     }
 
     public static getInstance(): AuthenticationService {
@@ -28,6 +31,7 @@ export class AuthenticationService {
         const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
         const userData = await this.userRef.where("uid", "==", userCredential.user.uid).get();
 
+
         const token:Token = userCredential.user.toJSON().stsTokenManager;
 
         if (!userData.empty) {
@@ -38,7 +42,19 @@ export class AuthenticationService {
 
             token.user = {
                 name: user.name,
+                role: user.role,
             };
+
+            const roleData = await this.roleRef.where("name", "==", user.role).get();
+
+            if (!roleData.empty) {
+                let role: any;
+                roleData.forEach((doc: any) => {
+                    role = doc.data();
+                });
+
+                token.permissions = role.permissions;
+            }
         }
 
         return token;

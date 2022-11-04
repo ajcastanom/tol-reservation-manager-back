@@ -3,6 +3,7 @@ export interface Token{
     accessToken: string;
     expirationTime?: string;
     expireIn?: string
-    apiKey:string;
+    apiKey: string;
     user?: any;
+    permissions?: []
 }
