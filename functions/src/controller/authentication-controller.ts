@@ -5,7 +5,7 @@ import {Status} from "../enum/status-enum";
 
 const HttpStatus = require("http-status-codes");
 
-const login = async (req: any, res = response) => {
+const authenticationLogin = async (req: any, res = response) => {
     console.log("Login");
     const {email, password} = req.body;
     const authenticationService = AuthenticationService.getInstance();
@@ -20,7 +20,7 @@ const login = async (req: any, res = response) => {
     });
 };
 
-const refreshToken = async (req: any, res = response) => {
+const authenticationRefreshToken = async (req: any, res = response) => {
     console.log("Refresh token");
     const {apiKey, refreshToken} = req.body;
     const authenticationService = AuthenticationService.getInstance();
@@ -35,7 +35,7 @@ const refreshToken = async (req: any, res = response) => {
     });
 };
 
-const recovery = async (req: any, res = response) => {
+const authenticationRecovery = async (req: any, res = response) => {
     console.log("Recovery password");
     const {email} = req.body;
     const authenticationService = AuthenticationService.getInstance();
@@ -50,7 +50,7 @@ const recovery = async (req: any, res = response) => {
     });
 };
 
-const logout = async (req: any, res = response) => {
+const authenticationLogout = async (req: any, res = response) => {
     console.log("Logout");
     const {uid} = req;
     const authenticationService = AuthenticationService.getInstance();
@@ -66,8 +66,8 @@ const logout = async (req: any, res = response) => {
 };
 
 module.exports = {
-    login,
-    refreshToken,
-    recovery,
-    logout,
+    authenticationLogin,
+    authenticationRefreshToken,
+    authenticationRecovery,
+    authenticationLogout,
 };

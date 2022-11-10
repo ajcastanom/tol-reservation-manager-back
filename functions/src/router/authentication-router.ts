@@ -2,7 +2,7 @@ import {Router} from "express";
 import {corsOptionsDelegate} from "../utils/utils";
 import {validateJWT} from "../middleware/validate-jwt";
 
-const {login, refreshToken, recovery, logout} = require("../controller/authentication-controller");
+const {authenticationLogin, authenticationRefreshToken, authenticationRecovery, authenticationLogout} = require("../controller/authentication-controller");
 const cors = require("cors");
 
 export const authenticationRouter = Router();
@@ -10,7 +10,7 @@ export const authenticationRouter = Router();
 // Cors Settings
 authenticationRouter.use(cors(corsOptionsDelegate));
 
-authenticationRouter.post("/login", [], login);
-authenticationRouter.post("/refresh-token", [], refreshToken);
-authenticationRouter.post("/recovery", [], recovery);
-authenticationRouter.get("/logout", [validateJWT], logout);
+authenticationRouter.post("/login", [], authenticationLogin);
+authenticationRouter.post("/refresh-token", [], authenticationRefreshToken);
+authenticationRouter.post("/recovery", [], authenticationRecovery);
+authenticationRouter.get("/logout", [validateJWT], authenticationLogout);

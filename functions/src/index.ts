@@ -2,6 +2,8 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import {authenticationRouter} from "./router/authentication-router";
 import {bookingRouter} from "./router/booking-router";
+import {providerRouter} from "./router/provider-router";
+import {airlineRouter} from "./router/airline-router";
 import ConfigAccount from "./config/config-account";
 
 require("dotenv").config();
@@ -18,3 +20,7 @@ admin.initializeApp({
 export const authenticationApi = functions.https.onRequest(authenticationRouter);
 // @ts-ignore
 export const bookingApi = functions.https.onRequest(bookingRouter);
+// @ts-ignore
+export const providerApi = functions.https.onRequest(providerRouter);
+// @ts-ignore
+export const airlineApi = functions.https.onRequest(airlineRouter);

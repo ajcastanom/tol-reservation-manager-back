@@ -2,7 +2,7 @@ import {response} from "express";
 
 const HttpStatus = require("http-status-codes");
 
-const create = async (req: any, res = response) => {
+const bookingCreate = async (req: any, res = response) => {
     console.log("Booking:create");
     res.status(HttpStatus.StatusCodes.OK).send({
         ok: true,
@@ -11,5 +11,5 @@ const create = async (req: any, res = response) => {
 };
 
 module.exports = {
-    create,
+    bookingCreate,
 };
