@@ -4,4 +4,5 @@ export const Collection = {
     PERMISSION: "permission",
     PROVIDER: "providers",
     AIRLINE: "airlines",
+    DOCUMENT_TYPE: "documentType",
 };

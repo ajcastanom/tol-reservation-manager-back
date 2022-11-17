@@ -4,6 +4,7 @@ import {authenticationRouter} from "./router/authentication-router";
 import {bookingRouter} from "./router/booking-router";
 import {providerRouter} from "./router/provider-router";
 import {airlineRouter} from "./router/airline-router";
+import {documentTypeRouter} from "./router/document-type-router";
 import ConfigAccount from "./config/config-account";
 
 require("dotenv").config();
@@ -22,5 +23,7 @@ export const authenticationApi = functions.https.onRequest(authenticationRouter)
 export const bookingApi = functions.https.onRequest(bookingRouter);
 // @ts-ignore
 export const providerApi = functions.https.onRequest(providerRouter);
-// @ts-ignore
+// @ts-ignorex
 export const airlineApi = functions.https.onRequest(airlineRouter);
+// @ts-ignore
+export const documentTypeApi = functions.https.onRequest(documentTypeRouter);
