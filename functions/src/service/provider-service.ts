@@ -48,4 +48,24 @@ export class ProviderService {
 
         return listResult;
     }
+
+    public async listByService(service: string): Promise<any[]> {
+        const providersData = await this.providerRef.where("services", "array-contains", service).get();
+
+        const listResult: any[] = [];
+
+        if (!providersData.empty) {
+            providersData.forEach((doc: any) => {
+                const provider = doc.data();
+
+                listResult.push({
+                    "nit": provider.nit,
+                    "name": provider.name,
+                    "country": provider.country,
+                });
+            });
+        }
+
+        return listResult;
+    }
 }

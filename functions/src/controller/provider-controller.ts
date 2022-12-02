@@ -44,7 +44,27 @@ const providerList = async (req: any, res = response) => {
         console.log(e);
         res.status(HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR).send({
             create: Status.FAILED,
-            description: "Ocurrió un error al guardar",
+            description: "Ocurrió un error al listar los proveedores",
+        });
+    });
+};
+
+const providerListByService = async (req: any, res = response) => {
+    console.log("Provider:listByService");
+
+    const providerService = ProviderService.getInstance();
+
+    const {service} = req.params;
+
+    providerService.listByService(service)
+        .then(function(response: any) {
+            if (response) res.status(HttpStatus.StatusCodes.OK).send(response);
+            else res.status(HttpStatus.StatusCodes.NOT_FOUND).send(response);
+        }).catch(function(e) {
+        console.log(e);
+        res.status(HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR).send({
+            create: Status.FAILED,
+            description: "Ocurrió un error al listar los proveedores",
         });
     });
 };
@@ -52,4 +72,5 @@ const providerList = async (req: any, res = response) => {
 module.exports = {
     providerCreate,
     providerList,
+    providerListByService,
 };
