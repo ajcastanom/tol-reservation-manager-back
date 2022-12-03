@@ -21,9 +21,8 @@ export class CountryService {
     }
 
     public createAll(countries: Country[]): Promise<Awaited<string>[]> {
-
-        countries.forEach(async country => {
-            let newCountry: Country = new Country(country);
+        countries.forEach(async (country) => {
+            const newCountry: Country = new Country(country);
             await this.countryRef.add(newCountry.toJson());
         });
 

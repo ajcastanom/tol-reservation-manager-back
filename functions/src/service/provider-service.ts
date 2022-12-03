@@ -54,7 +54,7 @@ export class ProviderService {
         const localCountry = ConfigAccount.getServiceAccount().local_country;
 
         if (!Object.values(Service).includes(service)) {
-            throw new Error(ErrorEnum.SERVICE_NOT_EXIST)
+            throw new Error(ErrorEnum.SERVICE_NOT_EXIST);
         }
 
         let query = this.providerRef.where("services", "array-contains", service);
@@ -71,7 +71,7 @@ export class ProviderService {
             query = query.where("type", "=", MedicalAssistance.INTERNATIONAL);
         }
 
-        const providersData = await query.orderBy("name").get()
+        const providersData = await query.orderBy("name").get();
 
         const listResult: any[] = [];
 

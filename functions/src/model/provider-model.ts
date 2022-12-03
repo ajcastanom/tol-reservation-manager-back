@@ -5,7 +5,7 @@ export interface IProvider{
     services: [];
 }
 
-export class Provider implements IProvider{
+export class Provider implements IProvider {
     nit: string;
     name: string;
     country: string;

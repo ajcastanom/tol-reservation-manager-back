@@ -14,5 +14,5 @@ bookingRouter.use(cors(corsOptionsDelegate));
 
 bookingRouter.post("/create", [
     validateJWT,
-    authorize(Permission.CAN_CREATE_BOOKING)
+    authorize(Permission.CAN_CREATE_BOOKING),
 ], bookingCreate);

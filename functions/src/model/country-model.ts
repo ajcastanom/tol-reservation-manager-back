@@ -10,7 +10,7 @@ interface ICountry{
     emoji: string;
 }
 
-export class Country implements ICountry{
+export class Country implements ICountry {
     id: number;
     name: string;
     iso2: string;
@@ -33,7 +33,7 @@ export class Country implements ICountry{
         this.emoji = country.emoji;
     }
 
-    toJson(){
+    toJson() {
         return {
             "id": this.id,
             "name": this.name,
@@ -44,6 +44,6 @@ export class Country implements ICountry{
             "subregion": this.subregion,
             "phoneCode": this.phoneCode,
             "emoji": this.emoji,
-        }
+        };
     }
 }

@@ -13,10 +13,10 @@ export const authorize = (...permissions: string[]) => {
             const user = await authenticationService.userByUid(req.uid);
             const rolePermissions = await authenticationService.permissions(user.role);
 
-            const match = permissions.filter(permission => rolePermissions.includes(permission))
+            const match = permissions.filter((permission: string) => rolePermissions.includes(permission));
 
             if (match.length == 0) {
-                throw new Error(ErrorEnum.UNAUTHORIZED)
+                throw new Error(ErrorEnum.UNAUTHORIZED);
             }
             next();
         } catch (error) {
@@ -26,7 +26,7 @@ export const authorize = (...permissions: string[]) => {
             });
         }
     };
-}
+};
 
 module.exports = {
     authorize,

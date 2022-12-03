@@ -13,7 +13,7 @@ const cityCreateAll = async (req: any, res = response) => {
         .then(function(response: any) {
             if (response) {
                 res.status(HttpStatus.StatusCodes.CREATED).send({
-                    create: Status.SUCCESS
+                    create: Status.SUCCESS,
                 });
             }
         }).catch(function(e) {

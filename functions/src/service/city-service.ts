@@ -3,7 +3,7 @@ import {CityDto} from "../dto/city-dto";
 import {City} from "../model/city-model";
 import {Status} from "../enum/status-enum";
 const admin = require("firebase-admin");
-const fs = require('fs');
+const fs = require("fs");
 
 export class CityService {
     private static instance: CityService;
@@ -22,18 +22,17 @@ export class CityService {
     }
 
     public async createAll(): Promise<Awaited<string>[]> {
-
-        const rawdata = fs.readFileSync('cities.json');
-        let cities: City[] = JSON.parse(rawdata);
+        const rawdata = fs.readFileSync("cities.json");
+        const cities: City[] = JSON.parse(rawdata);
         console.log(cities.length);
 
-        //let count = 0;
-        //const total = 150710;
+        // let count = 0;
+        // const total = 150710;
 
         const sum = 150000;
 
         const rangeInit = 0 + sum;
-        //const rangeEnd = 10000 + sum;
+        // const rangeEnd = 10000 + sum;
 
         const citiesExistData = await this.cityRef.get();
 
@@ -46,8 +45,8 @@ export class CityService {
 
 
         for (let i = rangeInit, n = 0; i < n; i++) {
-            let city = cities[i];
-            let newCity: City = new City(city);
+            const city = cities[i];
+            const newCity: City = new City(city);
 
             if (!listResult.includes(city.id)) this.cityRef.add(newCity.toJson());
         }
