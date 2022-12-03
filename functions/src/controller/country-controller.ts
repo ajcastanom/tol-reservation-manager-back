@@ -34,6 +34,26 @@ const countryCreateAll = async (req: any, res = response) => {
     });
 };
 
+const countryList = async (req: any, res = response) => {
+    console.log("Provider:createAll");
+
+    const countryService = CountryService.getInstance();
+
+    countryService.list()
+        .then(function(response: any) {
+            if (response) {
+                res.status(HttpStatus.StatusCodes.CREATED).send(response);
+            }
+        }).catch(function(e) {
+        console.log(e);
+        res.status(HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR).send({
+            create: Status.FAILED,
+            description: "Ocurrió un error al consultar los países",
+        });
+    });
+};
+
 module.exports = {
     countryCreateAll,
+    countryList,
 };
