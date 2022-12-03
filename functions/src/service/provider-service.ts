@@ -1,5 +1,6 @@
 import {firebaseConfig} from "../utils/utils";
 import {Collection} from "../enum/collection-enum";
+import {ProviderDto} from "../dto/provider-dto";
 const admin = require("firebase-admin");
 
 const firebase = require("firebase");
@@ -56,13 +57,7 @@ export class ProviderService {
 
         if (!providersData.empty) {
             providersData.forEach((doc: any) => {
-                const provider = doc.data();
-
-                listResult.push({
-                    "nit": provider.nit,
-                    "name": provider.name,
-                    "country": provider.country,
-                });
+                listResult.push(new ProviderDto(doc.data()));
             });
         }
 

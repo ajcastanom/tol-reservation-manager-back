@@ -5,6 +5,7 @@ import {bookingRouter} from "./router/booking-router";
 import {providerRouter} from "./router/provider-router";
 import {airlineRouter} from "./router/airline-router";
 import {documentTypeRouter} from "./router/document-type-router";
+import {countryRouter} from "./router/country-router";
 import ConfigAccount from "./config/config-account";
 
 require("dotenv").config();
@@ -27,3 +28,5 @@ export const providerApi = functions.https.onRequest(providerRouter);
 export const airlineApi = functions.https.onRequest(airlineRouter);
 // @ts-ignore
 export const documentTypeApi = functions.https.onRequest(documentTypeRouter);
+// @ts-ignore
+export const countryApi = functions.https.onRequest(countryRouter);

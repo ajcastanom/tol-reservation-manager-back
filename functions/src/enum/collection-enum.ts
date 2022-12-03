@@ -5,4 +5,6 @@ export const Collection = {
     PROVIDER: "providers",
     AIRLINE: "airlines",
     DOCUMENT_TYPE: "documentType",
+    COUNTRY: "country",
+    CITY: "city",
 };
