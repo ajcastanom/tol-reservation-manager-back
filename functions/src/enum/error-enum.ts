@@ -1,0 +1,4 @@
+export const ErrorEnum = {
+    SERVICE_NOT_EXIST: "SERVICE_NOT_EXIST",
+    UNAUTHORIZED: "UNAUTHORIZED",
+};

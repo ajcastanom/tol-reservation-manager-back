@@ -1,15 +1,11 @@
-import {firebaseConfig} from "../utils/utils";
 import {Collection} from "../enum/collection-enum";
 const admin = require("firebase-admin");
-
-const firebase = require("firebase");
 
 export class DocumentTypeService {
     private static instance: DocumentTypeService;
     private readonly documentTypeRef: any;
 
     private constructor() {
-        firebase.initializeApp(firebaseConfig);
         this.documentTypeRef = admin.firestore().collection(Collection.DOCUMENT_TYPE);
     }
 

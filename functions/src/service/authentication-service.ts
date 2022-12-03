@@ -1,4 +1,3 @@
-import {firebaseConfig} from "../utils/utils";
 import {AuthenticationClient} from "../client/authentication-client";
 import {Token} from "../model/token-model";
 import {Status} from "../enum/status-enum";
@@ -14,7 +13,6 @@ export class AuthenticationService {
     private readonly roleRef: any;
 
     private constructor() {
-        firebase.initializeApp(firebaseConfig);
         this.userRef = admin.firestore().collection(Collection.USER);
         this.roleRef = admin.firestore().collection(Collection.ROLE);
     }
@@ -102,5 +100,34 @@ export class AuthenticationService {
                 logout: Status.FAILED,
             };
         });
+    }
+
+    public async permissions(role: string): Promise<any> {
+        const roleData = await this.roleRef.where("name", "==", role).get();
+        let permissions = [];
+
+        if (!roleData.empty) {
+            let role: any;
+            roleData.forEach((doc: any) => {
+                role = doc.data();
+            });
+
+            permissions = role.permissions;
+        }
+
+        return permissions;
+    }
+
+    public async userByUid(uid: string): Promise<any> {
+        const userData = await this.userRef.where("uid", "==", uid).get();
+        let user = {};
+
+        if (!userData.empty) {
+            userData.forEach((doc: any) => {
+                user = doc.data();
+            });
+        }
+
+        return user;
     }
 }
