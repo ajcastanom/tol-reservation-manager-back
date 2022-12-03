@@ -4,4 +4,5 @@ export const Service = {
     MEDICAL_ASSISTANCE: "medicalAssistance",
     HOTEL: "hotel",
     TRANSFER: "transfer",
+    CABIN: "cabin",
 };
