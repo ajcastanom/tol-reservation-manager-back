@@ -51,7 +51,7 @@ export class ProviderService {
     }
 
     public async listByService(service: string): Promise<any[]> {
-        const providersData = await this.providerRef.where("services", "array-contains", service).get();
+        const providersData = await this.providerRef.where("services", "array-contains", service).orderBy("name").get();
 
         const listResult: any[] = [];
 

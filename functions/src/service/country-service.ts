@@ -36,7 +36,7 @@ export class CountryService {
     }
 
     public async list(): Promise<any[]> {
-        const countriesData = await this.countryRef.get();
+        const countriesData = await this.countryRef.orderBy("name").get();
 
         const listResult: any[] = [];
 
