@@ -7,13 +7,6 @@ const HttpStatus = require("http-status-codes");
 const countryCreateAll = async (req: any, res = response) => {
     console.log("Provider:createAll");
 
-    if (true) {
-        res.status(HttpStatus.StatusCodes.CONFLICT).send({
-            create: Status.FAILED,
-            description: "Operación fuera de servicio",
-        });
-        return;
-    }
     const countries = req.body;
     const countryService = CountryService.getInstance();
 
@@ -35,7 +28,7 @@ const countryCreateAll = async (req: any, res = response) => {
 };
 
 const countryList = async (req: any, res = response) => {
-    console.log("Provider:createAll");
+    console.log("Country:List");
 
     const countryService = CountryService.getInstance();
 

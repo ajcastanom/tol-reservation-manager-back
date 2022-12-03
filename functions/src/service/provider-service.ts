@@ -1,16 +1,16 @@
-import {firebaseConfig} from "../utils/utils";
 import {Collection} from "../enum/collection-enum";
 import {ProviderDto} from "../dto/provider-dto";
+import ConfigAccount from "../config/config-account";
+import {Service} from "../enum/service-enum";
+import {MedicalAssistance} from "../enum/medical-asisstance-enum";
+import {ErrorEnum} from "../enum/error-enum";
 const admin = require("firebase-admin");
-
-const firebase = require("firebase");
 
 export class ProviderService {
     private static instance: ProviderService;
     private readonly providerRef: any;
 
     private constructor() {
-        firebase.initializeApp(firebaseConfig);
         this.providerRef = admin.firestore().collection(Collection.PROVIDER);
     }
 
@@ -50,8 +50,28 @@ export class ProviderService {
         return listResult;
     }
 
-    public async listByService(service: string): Promise<any[]> {
-        const providersData = await this.providerRef.where("services", "array-contains", service).orderBy("name").get();
+    public async listByService(service: string, country: string): Promise<any[]> {
+        const localCountry = ConfigAccount.getServiceAccount().local_country;
+
+        if (!Object.values(Service).includes(service)) {
+            throw new Error(ErrorEnum.SERVICE_NOT_EXIST)
+        }
+
+        let query = this.providerRef.where("services", "array-contains", service);
+
+        // Se agrega condicion si es destino nacional
+        if (localCountry === country) {
+            query = query.where("country", "=", country);
+
+            // Se agrega condicion para consultar proveedores de asistencia medica nacional
+            if (Service.MEDICAL_ASSISTANCE === service) {
+                query = query.where("type", "=", MedicalAssistance.NATIONAL);
+            }
+        } else if (Service.MEDICAL_ASSISTANCE === service) {
+            query = query.where("type", "=", MedicalAssistance.INTERNATIONAL);
+        }
+
+        const providersData = await query.orderBy("name").get()
 
         const listResult: any[] = [];
 

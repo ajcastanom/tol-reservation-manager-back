@@ -1,17 +1,13 @@
-import {firebaseConfig} from "../utils/utils";
 import {Collection} from "../enum/collection-enum";
 import {Country} from "../model/country-model";
 import {CountryDto} from "../dto/country-dto";
 const admin = require("firebase-admin");
-
-const firebase = require("firebase");
 
 export class CountryService {
     private static instance: CountryService;
     private readonly countryRef: any;
 
     private constructor() {
-        firebase.initializeApp(firebaseConfig);
         this.countryRef = admin.firestore().collection(Collection.COUNTRY);
     }
 
