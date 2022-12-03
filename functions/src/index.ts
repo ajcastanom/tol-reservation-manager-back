@@ -5,6 +5,7 @@ import {bookingRouter} from "./router/booking-router";
 import {providerRouter} from "./router/provider-router";
 import {documentTypeRouter} from "./router/document-type-router";
 import {countryRouter} from "./router/country-router";
+import {cityRouter} from "./router/city-router";
 import ConfigAccount from "./config/config-account";
 import firebase from "firebase";
 import {firebaseConfig} from "./utils/utils";
@@ -31,3 +32,5 @@ export const providerApi = functions.https.onRequest(providerRouter);
 export const documentTypeApi = functions.https.onRequest(documentTypeRouter);
 // @ts-ignore
 export const countryApi = functions.https.onRequest(countryRouter);
+// @ts-ignore
+export const cityApi = functions.https.onRequest(cityRouter);

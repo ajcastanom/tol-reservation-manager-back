@@ -1,5 +1,5 @@
 interface ICountry{
-    id: string;
+    id: number;
     name: string;
     iso2: string;
     currency: string;
@@ -11,7 +11,7 @@ interface ICountry{
 }
 
 export class Country implements ICountry{
-    id: string;
+    id: number;
     name: string;
     iso2: string;
     currency: string;

@@ -1,6 +1,7 @@
 import {Collection} from "../enum/collection-enum";
 import {Country} from "../model/country-model";
 import {CountryDto} from "../dto/country-dto";
+import {Status} from "../enum/status-enum";
 const admin = require("firebase-admin");
 
 export class CountryService {
@@ -19,16 +20,14 @@ export class CountryService {
         return CountryService.instance;
     }
 
-    public createAll(countries: Country[]): Promise<CountryDto[]> {
-        let createResult: CountryDto[] = [];
+    public createAll(countries: Country[]): Promise<Awaited<string>[]> {
 
         countries.forEach(async country => {
             let newCountry: Country = new Country(country);
-            createResult.push(new CountryDto(newCountry));
             await this.countryRef.add(newCountry.toJson());
         });
 
-        return Promise.all(createResult);
+        return Promise.all(Status.SUCCESS);
     }
 
     public async list(): Promise<any[]> {

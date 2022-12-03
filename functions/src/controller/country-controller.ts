@@ -5,7 +5,7 @@ import {Status} from "../enum/status-enum";
 const HttpStatus = require("http-status-codes");
 
 const countryCreateAll = async (req: any, res = response) => {
-    console.log("Provider:createAll");
+    console.log("Country:createAll");
 
     const countries = req.body;
     const countryService = CountryService.getInstance();
@@ -15,7 +15,6 @@ const countryCreateAll = async (req: any, res = response) => {
             if (response) {
                 res.status(HttpStatus.StatusCodes.CREATED).send({
                     create: Status.SUCCESS,
-                    countries: response
                 });
             }
         }).catch(function(e) {
@@ -35,7 +34,7 @@ const countryList = async (req: any, res = response) => {
     countryService.list()
         .then(function(response: any) {
             if (response) {
-                res.status(HttpStatus.StatusCodes.CREATED).send(response);
+                res.status(HttpStatus.StatusCodes.OK).send(response);
             }
         }).catch(function(e) {
         console.log(e);
