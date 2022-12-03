@@ -1,7 +1,7 @@
 import {Country} from "../model/country-model";
 
 export class CountryDto {
-    id: string;
+    id: number;
     name: string;
 
     constructor(country: Country) {
