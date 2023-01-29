@@ -31,24 +31,26 @@ export class CityService {
 
         const sum = 150000;
 
-        const rangeInit = 0 + sum;
+        const rangeInit = sum;
         // const rangeEnd = 10000 + sum;
 
         const citiesExistData = await this.cityRef.get();
 
         const listResult: any[] = [];
+        const listResultNames: any = {};
         citiesExistData.forEach((doc: any) => {
             listResult.push(doc.data().id);
+            listResultNames[doc.data().name] = true;
         });
 
         console.log("Tamaño guardado: " + listResult.length);
 
 
-        for (let i = rangeInit, n = 0; i < n; i++) {
+        for (let i = rangeInit, n = 150710; i < n; i++) {
             const city = cities[i];
             const newCity: City = new City(city);
 
-            if (!listResult.includes(city.id)) this.cityRef.add(newCity.toJson());
+            if (!listResultNames[newCity.name] && !listResult.includes(city.id)) this.cityRef.add(newCity.toJson());
         }
 
         return Promise.all(Status.SUCCESS);

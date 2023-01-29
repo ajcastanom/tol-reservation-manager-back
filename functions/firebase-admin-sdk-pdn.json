@@ -15,6 +15,6 @@
   "measurement_id": "G-GL4VE8CDXF",
   "secure_token_url": "https://securetoken.googleapis.com/v1",
   "callback_recovery_password_url": "https://tolreservationmanager.web.app",
-  "local_country": "Colombia"
+  "local_country": 48
 }
 
