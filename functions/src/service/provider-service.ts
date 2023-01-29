@@ -50,7 +50,7 @@ export class ProviderService {
         return listResult;
     }
 
-    public async listByService(service: string, country: string): Promise<any[]> {
+    public async listByService(service: string, countryId: number): Promise<any[]> {
         const localCountry = ConfigAccount.getServiceAccount().local_country;
 
         if (!Object.values(Service).includes(service)) {
@@ -60,8 +60,8 @@ export class ProviderService {
         let query = this.providerRef.where("services", "array-contains", service);
 
         // Se agrega condicion si es destino nacional
-        if (localCountry === country) {
-            query = query.where("country", "=", country);
+        if (localCountry === countryId) {
+            query = query.where("countryId", "=", countryId);
 
             // Se agrega condicion para consultar proveedores de asistencia medica nacional
             if (Service.MEDICAL_ASSISTANCE === service) {

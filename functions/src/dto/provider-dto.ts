@@ -4,6 +4,7 @@ export class ProviderDto {
     nit: string;
     name: string;
     country: string;
+    countryId: string;
     codeIata: string;
 
     constructor(provider: Provider) {
@@ -11,5 +12,6 @@ export class ProviderDto {
         this.name = provider.name;
         this.country = provider.country;
         this.codeIata = provider.codeIata;
+        this.countryId = provider.countryId;
     }
 }

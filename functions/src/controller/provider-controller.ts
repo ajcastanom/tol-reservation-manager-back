@@ -54,9 +54,9 @@ const providerListByService = async (req: any, res = response) => {
 
     const providerService = ProviderService.getInstance();
 
-    const {service, country} = req.params;
+    const {service, countryId} = req.params;
 
-    providerService.listByService(service, country)
+    providerService.listByService(service, countryId)
         .then(function(response: any) {
             if (response) res.status(HttpStatus.StatusCodes.OK).send(response);
             else res.status(HttpStatus.StatusCodes.NOT_FOUND).send(response);

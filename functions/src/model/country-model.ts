@@ -20,6 +20,7 @@ export class Country implements ICountry {
     subregion: string;
     phoneCode: string;
     emoji: string;
+    translations: any;
 
     constructor(country: any) {
         this.id = country.id;
@@ -31,6 +32,7 @@ export class Country implements ICountry {
         this.subregion = country.subregion;
         this.phoneCode = country.phone_code;
         this.emoji = country.emoji;
+        this.translations = country.translations;
     }
 
     toJson() {
@@ -44,6 +46,7 @@ export class Country implements ICountry {
             "subregion": this.subregion,
             "phoneCode": this.phoneCode,
             "emoji": this.emoji,
+            "translations": this.translations,
         };
     }
 }

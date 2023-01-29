@@ -22,7 +22,7 @@ providerRouter.get("/list", [
     authorize(),
 ], providerList);
 
-providerRouter.post("/list/:service/:country", [
+providerRouter.post("/list/:service/:countryId", [
     validateJWT,
     authorize(Permission.CAN_CREATE_BOOKING),
 ], providerListByService);
