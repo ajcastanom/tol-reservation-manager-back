@@ -51,7 +51,7 @@ export class ProviderService {
     }
 
     public async listByService(service: string, countryId: number): Promise<any[]> {
-        const localCountry = ConfigAccount.getServiceAccount().local_country;
+        const localCountry = Number(ConfigAccount.getServiceAccount().local_country);
 
         if (!Object.values(Service).includes(service)) {
             throw new Error(ErrorEnum.SERVICE_NOT_EXIST);
@@ -61,14 +61,14 @@ export class ProviderService {
 
         // Se agrega condicion si es destino nacional
         if (localCountry === countryId) {
-            query = query.where("countryId", "=", countryId);
+            query = query.where("countryId", "==", countryId);
 
             // Se agrega condicion para consultar proveedores de asistencia medica nacional
             if (Service.MEDICAL_ASSISTANCE === service) {
-                query = query.where("type", "=", MedicalAssistance.NATIONAL);
+                query = query.where("type", "==", MedicalAssistance.NATIONAL);
             }
         } else if (Service.MEDICAL_ASSISTANCE === service) {
-            query = query.where("type", "=", MedicalAssistance.INTERNATIONAL);
+            query = query.where("type", "==", MedicalAssistance.INTERNATIONAL);
         }
 
         const providersData = await query.orderBy("name").get();
