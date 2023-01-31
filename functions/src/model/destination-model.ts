@@ -6,20 +6,20 @@ export interface IDestination{
     touristPackages: [];
 }
 
-/*
-export class Provider implements IProvider {
-    nit: string;
-    name: string;
-    country: string;
-    services: [];
-    codeIata: string;
 
-    constructor(provider: IProvider) {
-        this.nit = provider.nit;
-        this.name = provider.name;
-        this.country = provider.country;
-        this.services = provider.services;
-        this.codeIata = provider.codeIata;
+export class Destination implements IDestination {
+    countryId: string;
+    country: string;
+    cityId: string;
+    city: string;
+    touristPackages: [];
+
+    constructor(destination: IDestination) {
+        this.countryId = destination.countryId;
+        this.country = destination.country;
+        this.cityId = destination.cityId;
+        this.city = destination.city;
+        this.cityId = destination.cityId;
+        this.touristPackages = destination.touristPackages;
     }
 }
-*/
