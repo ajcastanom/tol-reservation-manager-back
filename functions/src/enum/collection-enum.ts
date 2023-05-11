@@ -7,4 +7,5 @@ export const Collection = {
     DOCUMENT_TYPE: "documentType",
     COUNTRY: "country",
     CITY: "city",
+    BOOKING: "booking",
 };
