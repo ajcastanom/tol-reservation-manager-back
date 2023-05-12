@@ -4,7 +4,7 @@ import {validateJWT} from "../middleware/validate-jwt";
 import {authorize} from "../middleware/authorize";
 import {Permission} from "../enum/permission-enum";
 
-const {bookingCreate} = require("../controller/booking-controller");
+const {bookingCreate, bookingFind} = require("../controller/booking-controller");
 const cors = require("cors");
 
 export const bookingRouter = Router();
@@ -16,3 +16,8 @@ bookingRouter.post("/create", [
     validateJWT,
     authorize(Permission.CAN_CREATE_BOOKING),
 ], bookingCreate);
+
+bookingRouter.get("/find/:contract", [
+    validateJWT,
+    authorize(Permission.CAN_QUERY_BOOKING),
+], bookingFind);

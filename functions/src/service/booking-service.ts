@@ -2,6 +2,7 @@ import {Collection} from "../enum/collection-enum";
 import {Status} from "../enum/status-enum";
 import {Booking} from "../model/booking-model";
 import {ResponseDto} from "../dto/response-dto";
+import {ErrorEnum} from "../enum/error-enum";
 const admin = require("firebase-admin");
 
 export class BookingService {
@@ -44,6 +45,18 @@ export class BookingService {
                                 "Error al guardar el registro"
                             );
                         });
+                }
+            });
+    }
+
+    public async find(contract: string): Promise<Booking> {
+        const bookingCreateRef = this.bookingRef.doc(contract);
+        return await bookingCreateRef.get()
+            .then(async (doc: any) => {
+                if (doc.exists) {
+                    return doc.data() as Booking;
+                } else {
+                    throw new Error(ErrorEnum.BOOKING_NOT_EXIST);
                 }
             });
     }
