@@ -2,6 +2,8 @@ import {response} from "express";
 import {BookingService} from "../service/booking-service";
 import {Status} from "../enum/status-enum";
 import {ResponseDto} from "../dto/response-dto";
+import {ErrorEnum} from "../enum/error-enum";
+import {Booking} from "../model/booking-model";
 
 const HttpStatus = require("http-status-codes");
 
@@ -12,7 +14,7 @@ const bookingCreate = async (req: any, res = response) => {
     const bookingService = BookingService.getInstance();
 
     bookingService.create(booking)
-        .then(function(response: ResponseDto) {
+        .then((response: ResponseDto) => {
             if (response) {
                 switch (response.state) {
                     case Status.SUCCESS:
@@ -26,7 +28,7 @@ const bookingCreate = async (req: any, res = response) => {
                         break;
                 }
             }
-        }).catch(function(e) {
+        }).catch((e) => {
         console.log(e);
         res.status(HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR).send(new ResponseDto(
             Status.FAILED,
@@ -35,6 +37,34 @@ const bookingCreate = async (req: any, res = response) => {
     });
 };
 
+const bookingFind = async (req: any, res = response) => {
+    console.log("Booking:find");
+
+    const {contract} = req.params;
+    const bookingService = BookingService.getInstance();
+
+    bookingService.find(contract)
+        .then((booking: Booking) => {
+            if (booking) {
+                res.status(HttpStatus.StatusCodes.OK).send(booking);
+            }
+        }).catch((e) => {
+            console.log(e);
+            if (e.message == ErrorEnum.BOOKING_NOT_EXIST) {
+                res.status(HttpStatus.StatusCodes.NOT_FOUND).send(new ResponseDto(
+                    Status.FAILED,
+                    "No se encontró la reserva"
+                ));
+            } else {
+                res.status(HttpStatus.StatusCodes.INTERNAL_SERVER_ERROR).send(new ResponseDto(
+                    Status.FAILED,
+                    "Ocurrió un error al consultar la reserva"
+                ));
+            }
+        });
+};
+
 module.exports = {
     bookingCreate,
+    bookingFind,
 };
